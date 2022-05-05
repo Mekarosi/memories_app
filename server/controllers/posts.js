@@ -41,7 +41,7 @@ export const getPosts = async (req, res) => {
  export const deletePost = async(req, res) => {
     const { id } = req.params
 
-    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('Invalid credentials')
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('Invalid credentials')
 
     await PostMessage.findByIdAndRemove(id)
 
