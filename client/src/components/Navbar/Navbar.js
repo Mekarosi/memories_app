@@ -17,7 +17,7 @@ const Navbar = () => {
    const logout = () => {
        dispatch({ type: 'LOGOUT' })
 
-       history.push('/')
+     history.push('/')
        setUser(null)
    }
 
@@ -39,7 +39,7 @@ const Navbar = () => {
         <Toolbar className={classes.toolbar}>
             {user ? (
                 <div className={classes.profile}>
-                    <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageURL}>{user.result.name.chatAt(0)}</Avatar>
+                     <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageURL}>{user.result.imageURL}</Avatar> 
                     <Typography className={classes.userName} variant='h6'>{user.result.name}</Typography>
                     <Button variant='contained' className={classes.logout} color='secondary' onClick={logout}>Logout</Button>
                 </div>

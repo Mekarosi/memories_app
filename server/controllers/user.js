@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 import User from '../models/user.js'
+import router from "../routes/users.js"
 
 export const signin = async (req, res) => {
      const { email, password } = req.body
@@ -25,7 +26,7 @@ export const signin = async (req, res) => {
 }
 
 export const signup = async (req, res) => {
-    const { email, password, confirmPassword, firstName, lastName } = res.body 
+    const { email, password, confirmPassword, firstName, lastName } = req.body 
 
     try {
         const existingUser = await User.findOne({ email })

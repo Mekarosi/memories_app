@@ -14,13 +14,14 @@ const Auth = () => {
    const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: ''}
     
    const classes = useStyles()
-   const [showPassword, setshowPassword] = useState(false)
+   const [showPassword, setShowPassword] = useState(false)
    const [formData, setFormData] = useState(initialState)
    const [isSignup, setIsSignup] = useState(false)
    const dispatch = useDispatch()
    const history = useHistory()
 
-   
+   const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword )
+
    const handleSubmit = (e) => {
        e.preventDefault()
      
@@ -31,7 +32,7 @@ const Auth = () => {
        }
    }
  
-   const handleShowPassword = () => setshowPassword((prevShowPassword) => !prevShowPassword )
+  
 
    
    const handleChange = (e) => {
@@ -40,7 +41,7 @@ const Auth = () => {
   
    const switchMode = () => {
        setIsSignup((prevIsSignup) => !prevIsSignup)
-       handleShowPassword(false)
+       setShowPassword(false)
    }
  
    const googleSuccess = async (res) => {
@@ -128,7 +129,7 @@ const Auth = () => {
                     onFailure={googleFailure}
                     cookiePolicy='single_host_origin'
                 />
-                <Grid container justify='flex-end'>
+                <Grid container justifyContent='flex-end'>
                     <Grid item>
                         <Button onClick={switchMode}>
                             {isSignup ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
