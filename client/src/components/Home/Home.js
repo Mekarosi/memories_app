@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 import ChipInput from 'material-ui-chip-input'
 
 import { useDispatch } from 'react-redux'
-import { getPosts } from '../../actions/posts'
+import { getPosts, getPostsBySearch } from '../../actions/posts'
 import Pagination from '../Pagination'
 import Posts from '../Posts/Posts'
 import Form from '../Form/Form'
@@ -22,10 +22,10 @@ const Home = () => {
     const [tags, setTags] = useState([])
     const dispatch = useDispatch()
     const classes = useStyles()
-    const query = useQuery()
+    // const query = useQuery()
     const history = useHistory()
-    const page = query.get('page') || 1
-    const searchQuery = query.get('searchQuery')
+    // const page = query.get('page') || 1
+    // const searchQuery = query.get('searchQuery')
     
   
     useEffect(() => {
@@ -33,9 +33,10 @@ const Home = () => {
     }, [currentId, dispatch])
 
     const searchPost = () => {
-      if(search.trim()){
-        // dispatch -> fetch search post
-      } else {
+      if(search.trim() || tags){
+        dispatch(getPostsBySearch({ search, tags: tags.join(',') }))
+        history.push(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`)
+      } else { 
         history.push('/')
       }
     }
