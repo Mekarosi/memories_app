@@ -3,6 +3,7 @@ import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 import { useParams, useHistory } from 'react-router-dom'
+import CommentSection from './CommentSection'
 import { getPost, getPostsBySearch  } from '../../actions/posts'
 
 import useStyles from './styles'
@@ -48,7 +49,7 @@ useEffect(() => {
           <Divider style={{ margin: '20px 0' }} />
           <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
           <Divider style={{ margin: '20px 0' }} />
-          <Typography variant="body1"><strong>Comments - coming soon!</strong></Typography>
+         <CommentSection post={post} />
           <Divider style={{ margin: '20px 0' }} />
         </div>
         <div className={classes.imageSection}>
@@ -67,7 +68,7 @@ useEffect(() => {
                 <Typography gutterBottom variant='subtitle2'>{name}</Typography>
                 <Typography gutterBottom variant='subtitle2'>{message}</Typography>
                 <Typography gutterBottom variant='subtitle1'>likes: {likes.length}</Typography>
-                <img  src={selectedFile} width='200px' />
+                <img  src={selectedFile} width='200px' alt={name} />
               </div>
             ) )}
           </div>
