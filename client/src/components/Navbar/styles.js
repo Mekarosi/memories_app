@@ -10,6 +10,10 @@ export default makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '10px 50px',
+    [theme.breakpoints.down('sm')]: {
+      flexWrap: 'wrap',
+      flexDirection: 'column',
+    },
   },
   heading: {
     color: 'rgba(0,183,255, 1)',
@@ -18,6 +22,14 @@ export default makeStyles((theme) => ({
   image: {
     marginLeft: '-5px',
   },
+
+  signin: {
+    [theme.breakpoints.down('sm')]: {
+      marginRight: '50px',
+      
+    }
+  },
+
   toolbar: {
     display: 'flex',
     justifyContent: 'flex-end',
@@ -27,6 +39,10 @@ export default makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     width: '400px',
+    [theme.breakpoints.down('sm')]: {
+      marginRight: '50px',
+      
+    },
   },
   userName: {
     display: 'flex',

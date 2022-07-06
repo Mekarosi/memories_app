@@ -9,19 +9,21 @@ import { commentPost } from '../../actions/posts'
 const CommentSection = ({ post }) => {
    
     const classes = useStyles()
-    const [comments, setComments] = useState([1, 2, 3, 4])
+    const [comments, setComments] = useState(['great post', 2, 3, 4])
     const [comment, setComment] = useState('')
-    const user = JSON.parse(localStorage.getItem('profile'))
     const dispatch = useDispatch()
+    const user = JSON.parse(localStorage.getItem('profile'))
 
- 
+
+    console.log(user) 
 
     const handleClick = () => {
-        const finalComment = `${user.result.name}: ${comment}`
+        const finalComment = `${user?.result?.name}: ${comment}`
         dispatch(commentPost(finalComment, post._id))
+        
     }
 
-
+    
     return (
         <div>
             <div className={classes.commentsOuterContainer}>
@@ -29,11 +31,11 @@ const CommentSection = ({ post }) => {
                     <Typography gutterBottom variant='h6'>Comments</Typography>
                     {comments.map((c, i) =>  (
                         <Typography key={i} gutterBottom variant='subtitle1'>
-                            Comment {i}
+                           {c} {i}
                         </Typography>
                     ))}
                 </div>
-                {user?.result?.name && (
+                {/* {user?.result?.name && ( */}
                 <div style={{ width: '70%' }}>
                 <Typography gutterBottom variant='h6'>Write a Comment</Typography>
                 <TextField 
@@ -49,7 +51,7 @@ const CommentSection = ({ post }) => {
                     Comment
                 </Button>
                 </div>
-                )}   
+                  
             </div>
         </div>
     )
