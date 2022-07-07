@@ -12,13 +12,17 @@ const CommentSection = ({ post }) => {
     const [comments, setComments] = useState(post?.comments)
     const [comment, setComment] = useState('')
     const dispatch = useDispatch()
-    const user = JSON.parse(localStorage.getItem('profile'))
+    const commentsRef = useRef()
 
-
-    const handleClick = () => {
+    const handleClick = async () => {
         const finalComment = `${comment}`
-        dispatch(commentPost(finalComment, post._id))
-       console.log(finalComment, post._id) 
+
+      const newComments = await dispatch(commentPost(finalComment, post._id))
+      
+      setComments(newComments)
+      setComment('')
+
+      commentsRef.current.scrollIntoView({behavior: "smooth" })
     }
 
   
@@ -31,12 +35,11 @@ const CommentSection = ({ post }) => {
                     <Typography gutterBottom variant='h6'>Comments</Typography>
                        {comments?.map((c, i) =>  (
                 
-                        <Typography key={i} gutterBottom variant='subtitle1'>comment {i}:  {c} </Typography>
-                        // <Typography gutterBottom variant='subtitle1'>comment</Typography> 
-                     )   
-                          
+                        <Typography key={i} gutterBottom variant='subtitle1'><strong style={{ color: 'blueviolet' }}>comment {i}:</strong>  {c} </Typography>
                         
+                     )      
                        )}
+                     <div ref={commentsRef}></div>
                        
                 </div>
                 {/* {user?.result?.name && ( */}
