@@ -1,4 +1,4 @@
-import { START_LOADING, END_LOADING, FETCH_ALL,FETCH_POST, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes'
+import { START_LOADING, END_LOADING, FETCH_ALL,FETCH_POST, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE, LIKE, COMMENT } from '../constants/actionTypes'
 import * as api from '../api'
 
 
@@ -90,8 +90,10 @@ export const commentPost = (value, id) => async (dispatch) => {
      try {
         const { data } = await api.comment(value, id)
 
-        console.log(data)
+       dispatch({ type: 'COMMENT', payload: data })
+
+       return data.comments
      } catch (error) {
-         
+         console.log(error)
      }
 }

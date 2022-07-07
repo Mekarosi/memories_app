@@ -1,4 +1,4 @@
-import { START_LOADING, END_LOADING, FETCH_POST, FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, FETCH_BY_SEARCH } from '../constants/actionTypes'
+import { START_LOADING, END_LOADING, FETCH_POST, FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, FETCH_BY_SEARCH, COMMENT } from '../constants/actionTypes'
 
 const reducer = (state = { isloading: true, posts: [] }, action) => {
     switch (action.type) {
@@ -20,6 +20,20 @@ const reducer = (state = { isloading: true, posts: [] }, action) => {
             return { ...state, post: action.payload }    
         case LIKE:
             return { ...state, posts: state.posts.map((post) => post._id === action.payload._id ? action.payload : post) }
+        case COMMENT: 
+             return {
+                ...state,
+                posts: state.posts.map((post) => {
+                     // change the post that just recieved a comment...
+                    
+                    if(post._id === action.payload._id){
+                        return action.payload
+                    }
+                    // return all the posts normally...
+                    return post
+                   
+                })
+             }
         case CREATE:
             return {...state, posts: [...state.posts, action.payload]}
        

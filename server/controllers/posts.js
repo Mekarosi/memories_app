@@ -102,18 +102,42 @@ export const getPosts = async (req, res) => {
  }
 
 
- export const commentPost = async (req, res) => {
-    const { id } = req.params;
-    const { value } = req.body;
+//  export const commentPost = async (req, res) => {
+//     try {
+//         const post = await PostMessage.findById(req.params.id)
+       
+//         const newComment = {
+//             value: req.body.value
+//         }
+//         post.comments.unshift(newComment)
 
-   
+//         await post.save()
 
-  
+//          res.json(post.comments)
+//     } catch (error) {
+//         console.log(error)
+//     }
+    
+// };
+
+export const commentPost = async (req, res) => {
+ try
+ {   const { id } = req.params
+    const { value } = req.body
+
     const post = await PostMessage.findById(id)
 
-    post.comments.push(value)
+    if(!Array.isArray(post.comments)){
+        post.comments = []
+    }
+       post.comments.push(value)
 
-    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
+       const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {new: true})
+      
+       res.json(updatedPost)
 
-    res.json(updatedPost);
-};
+   } catch (error) {
+    console.log(error.message)
+       res.status(500).json({ message: error.message })
+   }
+}
