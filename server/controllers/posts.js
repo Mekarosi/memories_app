@@ -102,23 +102,6 @@ export const getPosts = async (req, res) => {
  }
 
 
-//  export const commentPost = async (req, res) => {
-//     try {
-//         const post = await PostMessage.findById(req.params.id)
-       
-//         const newComment = {
-//             value: req.body.value
-//         }
-//         post.comments.unshift(newComment)
-
-//         await post.save()
-
-//          res.json(post.comments)
-//     } catch (error) {
-//         console.log(error)
-//     }
-    
-// };
 
 export const commentPost = async (req, res) => {
  try
